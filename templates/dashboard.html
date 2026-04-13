@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI Meeting Prep</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <style>
+        .fc-theme-standard td,
+        .fc-theme-standard th {
+            border-color: var(--glass-border);
+        }
+
+        .fc {
+            color: var(--text-main);
+        }
+
+        .fc-button-primary {
+            background-color: var(--primary) !important;
+            border: none !important;
+        }
+
+        :root {
+            --bg-color: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --secondary: #10b981;
+            --secondary-hover: #059669;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --danger: #ef4444;
+            --glow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .container {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+        }
+
+        .panel {
+            flex: 1;
+            min-width: 320px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+
+        .panel h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .status {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 1.2rem;
+            color: var(--secondary);
+        }
+
+        #prep-result {
+            margin-top: 2rem;
+            display: none;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--glass-border);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .result-section h3 {
+            font-size: 1.1rem;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .result-section.missed h3 {
+            color: var(--danger);
+        }
+
+        .result-section p,
+        .result-section ul {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .result-section ul {
+            padding-left: 1.2rem;
+        }
+
+        .loader {
+            display: none;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; padding: 0; box-sizing: border-box;">
+        <h1 style="text-align: left; margin: 0;">Agent Dashboard</h1>
+        <a href="/logout"
+            style="color: var(--danger); text-decoration: none; font-weight: 600; background: rgba(239, 68, 68, 0.1); padding: 0.5rem 1rem; border-radius: 0.5rem; transition: background 0.3s;">Sign
+            Out</a>
+    </div>
+    <p class="subtitle"
+        style="text-align: left; max-width: 1200px; width: 100%; padding: 0; margin-top: 0.5rem; box-sizing: border-box;">
+        Welcome back. Monitor your schedules and synthesize prep briefings below.
+    </p>
+
+    <div class="container">
+        <!-- Calendar Panel -->
+        <div class="panel" style="flex-basis: 100%;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass-border); margin-bottom: 1.5rem; padding-bottom: 0.5rem;">
+                <h2 style="border: none; padding: 0; margin: 0;">📅 Client Schedule</h2>
+                <button class="btn-secondary" style="width: auto; padding: 0.5rem 1rem;" onclick="schedulePrompt()">+
+                    Schedule</button>
+            </div>
+            <div id="calendar"></div>
+        </div>
+
+        <!-- Add Memory Panel -->
+        <div class="panel">
+            <h2>🧠 Add Meeting Notes to Hindsight</h2>
+            <div class="form-group">
+                <label for="contact-name">Contact Name / Client:</label>
+                <input type="text" id="contact-name" placeholder="e.g., Rahul" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="notes">Meeting Notes:</label>
+                <textarea id="notes"
+                    placeholder="e.g., Discussed project deadline. He requested a report to be sent by Friday. We agreed on a $5k budget."></textarea>
+            </div>
+            <button class="btn-primary" onclick="addMemory()">Save to Memory</button>
+            <div id="add-status" class="status"></div>
+        </div>
+
+        <!-- Generate Prep Panel -->
+        <div class="panel">
+            <h2>⚡ Generate Meeting Preparation</h2>
+            <div class="form-group">
+                <label for="prep-contact">Who are you meeting with?</label>
+                <input type="text" id="prep-contact" placeholder="e.g., Rahul" autocomplete="off">
+            </div>
+            <button class="btn-secondary" onclick="generatePrep()">Synthesize Insights</button>
+
+            <div id="prep-loader" class="loader"></div>
+
+            <div id="prep-result">
+                <div class="result-section">
+                    <h3>📊 Summary of Past Run-ins</h3>
+                    <p id="res-summary"></p>
+                </div>
+                <div class="result-section">
+                    <h3>✅ Pending Tasks</h3>
+                    <p id="res-tasks"></p>
+                </div>
+                <div class="result-section missed">
+                    <h3>⚠️ Missed Follow-ups</h3>
+                    <p id="res-missed"></p>
+                </div>
+                <div class="result-section">
+                    <h3>💡 Agent Advice</h3>
+                    <p id="res-advice"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "";
+        let calendar;
+        fetch("/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contact_name: "Rahul", notes: "Discussed project deadline. He requested a report to be sent by Friday. We agreed on a $5k budget." })
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: `${API_URL}/api/schedules`,
+                themeSystem: 'standard',
+                height: 500,
+            });
+            calendar.render();
+        });
+
+        async function schedulePrompt() {
+            const title = prompt("Client / Meeting Topic:");
+            if (!title) return;
+            const dateStr = prompt("Date (YYYY-MM-DD):");
+            if (!dateStr) return;
+
+            try {
+                const res = await fetch(`${API_URL}/api/schedules`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title: title, start: dateStr })
+                });
+                if (res.ok) calendar.refetchEvents();
+                else alert("Failed to save schedule.");
+            } catch (err) {
+                console.error("ERROR DETAILS:", err);
+                statusDiv.innerText = err.message;
+            }
+        }
+
+
+        async function addMemory() {
+            const contact = document.getElementById('contact-name').value;
+            const notes = document.getElementById('notes').value;
+            const statusDiv = document.getElementById('add-status');
+
+            if (!contact || !notes) {
+                statusDiv.innerText = "Please fill in both fields.";
+                statusDiv.style.color = "var(--danger)";
+                return;
+            }
+
+            statusDiv.innerText = "Saving to Hindsight Memory...";
+            statusDiv.style.color = "var(--text-muted)";
+
+            try {
+                const response = await fetch(`${API_URL}/add`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contact_name: contact, notes: notes })
+
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    statusDiv.innerText = "Target locked. Memory saved securely.";
+                    statusDiv.style.color = "var(--secondary)";
+                    document.getElementById('notes').value = ''; // clear only notes
+                } else {
+                    statusDiv.innerText = "Error: " + (data.error || "Unknown error");
+                    statusDiv.style.color = "var(--danger)";
+                }
+            } catch (err) {
+                statusDiv.innerText = "Failed to connect to backend.";
+                statusDiv.style.color = "var(--danger)";
+                console.error(err);
+            }
+        }
+
+        async function generatePrep() {
+            const contact = document.getElementById('prep-contact').value;
+            const resultDiv = document.getElementById('prep-result');
+            const loader = document.getElementById('prep-loader');
+
+            if (!contact) {
+                alert("Please specify who you are meeting with.");
+                return;
+            }
+
+            // Reset UI
+            resultDiv.style.display = 'none';
+            loader.style.display = 'block';
+
+            try {
+                const response = await fetch(`${API_URL}/prepare`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contact_name: contact })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert("Error: " + (data.error || "Failed to generate AI preparation."));
+                    loader.style.display = 'none';
+                    return;
+                }
+
+                const ins = data.insights;
+
+                document.getElementById('res-summary').innerText = ins.summary || 'None';
+                document.getElementById('res-tasks').innerText = ins.pending_tasks || 'None';
+                document.getElementById('res-missed').innerText = ins.missed_follow_ups || 'None';
+                document.getElementById('res-advice').innerText = ins.advice || 'None';
+
+                loader.style.display = 'none';
+                resultDiv.style.display = 'block';
+
+            } catch (err) {
+                loader.style.display = 'none';
+                alert("Failed to connect to backend.");
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+
+</html>

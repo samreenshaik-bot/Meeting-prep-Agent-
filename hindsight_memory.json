@@ -1,0 +1,66 @@
+{
+    "rahul": [
+        {
+            "timestamp": "2026-04-10T22:49:44.035442",
+            "notes": "Discussed progress on the mobile app project. Rahul mentioned delays due to backend issues. Promised to share updated timeline by Friday. Follow-up needed on API integration."
+        },
+        {
+            "timestamp": "2026-04-10T23:22:13.323789",
+            "notes": "Discussed progress on the mobile app project. Rahul mentioned delays due to backend issues. Promised to share updated timeline by Friday. Follow-up needed on API integration."
+        },
+        {
+            "timestamp": "2026-04-10T23:46:23.616475",
+            "notes": "Meeting Notes:\nHad a discussion with the client regarding the development of a product review system. The client emphasized the need for AI-generated summaries to analyze customer feedback efficiently. They prefer a simple and user-friendly interface with fast response times. It was agreed to use Python along with NLP models for implementation. The initial prototype is expected to be completed within two weeks, and a follow-up meeting will be scheduled to review the progress and demonstrate the working model."
+        }
+    ],
+    "priya": [
+        {
+            "timestamp": "2026-04-10T22:50:08.531304",
+            "notes": "Talked about onboarding their company for our AI solution. Priya showed interest but requested a demo with real data. Budget discussed around \u20b94\u20135 lakhs. Need to send proposal and schedule demo next week."
+        },
+        {
+            "timestamp": "2026-04-10T23:22:47.631884",
+            "notes": "Talked about onboarding their company for our AI solution. Priya showed interest but requested a demo with real data. Budget discussed around \u20b94\u20135 lakhs. Need to send proposal and schedule demo next week."
+        }
+    ],
+    "neha": [
+        {
+            "timestamp": "2026-04-10T22:50:37.560698",
+            "notes": "Weekly sync meeting. Discussed UI improvements and user feedback. Neha suggested improving dashboard speed. Agreed to implement changes before next sprint review."
+        },
+        {
+            "timestamp": "2026-04-10T23:23:12.232145",
+            "notes": "Weekly sync meeting. Discussed UI improvements and user feedback. Neha suggested improving dashboard speed. Agreed to implement changes before next sprint review."
+        },
+        {
+            "timestamp": "2026-04-10T23:25:37.363301",
+            "notes": "Strategic discussion on scaling infrastructure. Vikram raised concerns about server costs. Proposed shifting to a more optimized cloud setup. Need to prepare cost comparison report."
+        }
+    ],
+    "anjali": [
+        {
+            "timestamp": "2026-04-10T23:47:01.216021",
+            "notes": "Meeting Notes:\nDiscussed the requirements for a customer support chatbot for the client\u2019s website. The client wants the bot to handle FAQs, basic troubleshooting, and escalate complex queries to human agents. They preferred integration with WhatsApp and a web interface. We suggested using a combination of NLP models and predefined responses. Timeline for the first version is set to 3 weeks, with weekly progress updates."
+        },
+        {
+            "timestamp": "2026-04-10T23:47:20.109821",
+            "notes": "Discussed the creation of an e-commerce website with modern UI and secure payment integration. The client wants features like product filtering, user reviews, and order tracking. We recommended using Node.js and MongoDB for scalability. The project timeline is estimated at 4 weeks, starting with UI design and followed by backend development."
+        }
+    ],
+    "akshita": [
+        {
+            "timestamp": "2026-04-12T15:42:34.350028",
+            "notes": "In the client meeting with Akshita regarding the website redesign project, the client shared that they were satisfied with the overall modern UI design but wanted the homepage to be more interactive and engaging. They suggested incorporating features such as live chat functionality and a personalized product recommendation system to enhance user experience. We discussed the feasibility of these additions and confirmed that they could be implemented effectively. The project timeline was also reviewed, with an agreement to deliver the first version within 2\u20133 weeks after finalizing the requirements, followed by a feedback and revision phase. As next steps, we will update the proposal based on the client\u2019s inputs, share a revised timeline, and begin development upon receiving final approval."
+        },
+        {
+            "timestamp": "2026-04-12T15:42:58.153051",
+            "notes": "In another client meeting focused on a mobile application development project, the client expressed their goal of creating a user-friendly app with a clean interface and fast performance. They emphasized the importance of smooth navigation and secure login features, especially for first-time users. We discussed incorporating features like social media login, push notifications, and real-time updates to enhance engagement. The client also requested regular progress updates and a demo at each major milestone. We proposed a development timeline of 4\u20135 weeks for the initial version, including testing and feedback iterations. The meeting concluded with mutual agreement on the project direction, and we committed to sharing a detailed roadmap and starting the development process after final confirmation.\n"
+        }
+    ],
+    "samreen": [
+        {
+            "timestamp": "2026-04-12T15:44:45.685307",
+            "notes": "In a brief client meeting, the client requested improvements to their web application\u2019s loading speed and overall performance. We suggested optimizing images, reducing unnecessary scripts, and implementing caching techniques. The client agreed with the approach, and we decided to proceed with the updates and share results in the next review."
+        }
+    ]
+}
