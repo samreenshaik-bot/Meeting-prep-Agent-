@@ -16,7 +16,7 @@ Retrieve relevant past interactions
 Generate AI-powered meeting preparation summaries
 
 Instead of manually reviewing notes, the system provides context-aware insights instantly.
-=================================================================================================================================================================================================================
+================================================================================================================================
 🎯 Key Features
 
 🧠 Persistent Memory System
@@ -38,7 +38,7 @@ The more you use it, the smarter your meeting preparation becomes.
 🌐 Full-Stack Implementation
 
 Built using Flask, HTML/CSS/JS, and AI APIs.
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 🏗️ Project Architecture
 
 AI-Meeting-Prep-Agent/
@@ -105,10 +105,10 @@ AI returns structured insights
   "advice": "Follow up on pending deliverables before meeting."
 }
 
-----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
 🛠️ Tech Stack
 
-Backend
+-Backend
 
 Python
 
@@ -116,19 +116,19 @@ Flask
 
 Flask-CORS
 
-AI / LLM
+-AI / LLM
 
 Groq API (Primary)
 
 OpenAI (Fallback)
 
-Memory Layer
+-Memory Layer
 
 Simulated Hindsight Memory
 
 JSON-based persistence
 
-Frontend
+-Frontend
 
 HTML
 
@@ -136,7 +136,7 @@ CSS (Dark UI + Glassmorphism)
 
 JavaScript
 
-======================================================================================================================================================
+=================================================================================
 ⚙️ Setup Instructions
 
 1️⃣ Clone the Repository
@@ -173,7 +173,7 @@ Open in browser:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6d5661dc-8e46-495a-83c5-1fd8b19fbf5b" />
 
 
-==========================================================================================================================================================
+==============================================================================================
 
 Contributions are welcome! Feel free to fork and improve the project.
 
